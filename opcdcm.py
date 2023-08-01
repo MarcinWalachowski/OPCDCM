@@ -99,20 +99,24 @@ def myfunfilegenerate(sender, data):
 
 with dpg.window(label="OPCDCM Configurator", tag="Primary Window"):
 
-    with dpg.table(width=780, header_row=True, row_background=True,
-                   borders_innerH=True, borders_outerH=True, borders_innerV=True,
-                   borders_outerV=True, delay_search=True, resizable=True) as table_id:
-        dpg.add_table_column(label="Signal number")
-        dpg.add_table_column(label="Signal tag", width=200)
-        dpg.add_table_column(label="Loop No", width=200)
+    with dpg.tree_node(label="UserDataProgram1"):
+        with dpg.table(width=780, header_row=True, row_background=True,
+                       borders_innerH=True, borders_outerH=True, borders_innerV=True,
+                       borders_outerV=True, delay_search=True, resizable=True) as table_id:
+            dpg.add_table_column(label="Signal number")
+            dpg.add_table_column(label="Signal tag", width=200)
+            dpg.add_table_column(label="Loop No", width=200)
 
-        for i in range(lenrow):
-            with dpg.table_row():
-                dpg.add_text(i)
-                dpg.add_combo(tag=121+i, items=list_of_variable_mapping, height_mode=dpg.mvComboHeight_Small, no_arrow_button=False,
-                              no_preview=False, popup_align_left=True, callback=myfunprint, user_data=[1, i])
-                dpg.add_combo(tag=221+i, items=items2, height_mode=dpg.mvComboHeight_Small, no_arrow_button=False,
-                                         no_preview=False, popup_align_left=True, callback=myfunprint, user_data=[2, i])
+            for i in range(lenrow):
+                with dpg.table_row():
+                    dpg.add_text(i)
+                    dpg.add_combo(tag=121+i, items=list_of_variable_mapping, height_mode=dpg.mvComboHeight_Small, no_arrow_button=False,
+                                  no_preview=False, popup_align_left=True, callback=myfunprint, user_data=[1, i])
+                    dpg.add_combo(tag=221+i, items=items2, height_mode=dpg.mvComboHeight_Small, no_arrow_button=False,
+                                             no_preview=False, popup_align_left=True, callback=myfunprint, user_data=[2, i])
+
+    with dpg.tree_node(label="UserDataProgram2"):
+        dpg.add_text(f"ggg")
 
     dpg.add_button(label="Generate files", tag="GenFile", pos=(280, 540), width=200, height=30, callback=myfunfilegenerate)
     dpg.add_text("Test version", pos=(340, 590), color=[255, 0, 0])
